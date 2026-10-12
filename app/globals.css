@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #FFFFFF;
+    --surface: #FAFAFF;
+    --surface-hover: #F2F0FF;
+    --card: #FFFFFF;
+    --card-hover: #F8F7FF;
+    --border: #E9E7F5;
+    --border-strong: #D5D1EB;
+
+    --foreground: #14122B;
+    --foreground-secondary: #5B5878;
+    --foreground-muted: #8E8BA7;
+
+    --primary: #7C3AED;
+    --primary-foreground: #FFFFFF;
+    --primary-hover: #6D28D9;
+    --primary-blue: #3B82F6;
+    --primary-indigo: #6366F1;
+
+    --brand-gradient: linear-gradient(135deg, #7C3AED 0%, #6366F1 50%, #3B82F6 100%);
+    --brand-gradient-hover: linear-gradient(135deg, #6D28D9 0%, #4F46E5 50%, #2563EB 100%);
+
+    --status-success: #10B981;
+    --status-warning: #F59E0B;
+    --status-error: #EF4444;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    --shadow-subtle: 0 1px 2px rgba(20, 18, 43, 0.04);
+    --shadow-card: 0 4px 16px rgba(20, 18, 43, 0.06);
+    --shadow-glow: 0 8px 24px rgba(124, 58, 237, 0.08);
+  }
+
+  .dark {
+    --background: #0C0A17;
+    --surface: #141126;
+    --surface-hover: #1D1936;
+    --card: #141126;
+    --card-hover: #1E1A38;
+    --border: #242042;
+    --border-strong: #36305C;
+
+    --foreground: #F7F6FF;
+    --foreground-secondary: #A3A0C2;
+    --foreground-muted: #6C688F;
+
+    --primary: #8B5CF6;
+    --primary-foreground: #FFFFFF;
+    --primary-hover: #7C3AED;
+
+    --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --shadow-glow: 0 8px 30px rgba(139, 92, 246, 0.22);
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--foreground);
+  }
+
+  code, pre, kbd {
+    font-family: var(--font-mono), monospace;
+  }
+}
+
+/* Custom Utilities for the Design System */
+.bg-brand-gradient {
+  background: var(--brand-gradient);
+}
+
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

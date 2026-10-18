@@ -4,13 +4,20 @@ import { AppearanceWidget } from "@/components/dashboard/widgets/AppearanceWidge
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Palette, Shield, Sparkles } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardSettingsPage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  const layout = userId
-    ? await prisma.dashboardLayout.findUnique({ where: { userId } })
-    : null;
+  let layout = null;
+  if (userId) {
+    try {
+      layout = await prisma.dashboardLayout.findUnique({ where: { userId } });
+    } catch (err) {
+      console.warn("Could not load user layout:", err);
+    }
+  }
 
   return (
     <div className="space-y-6 max-w-4xl">

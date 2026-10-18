@@ -20,23 +20,27 @@ export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = await prisma.project.findUnique({
-    where: { slug },
-  });
+  try {
+    const project = await prisma.project.findUnique({
+      where: { slug },
+    });
 
-  if (!project) {
-    return { title: "Project Not Found" };
+    if (project) {
+      return {
+        title: `${project.title} — Architectural Case Study`,
+        description: project.description,
+        openGraph: {
+          title: project.title,
+          description: project.description,
+          images: [project.coverImage],
+        },
+      };
+    }
+  } catch {
+    // Graceful fallback
   }
 
-  return {
-    title: `${project.title} — Architectural Case Study`,
-    description: project.description,
-    openGraph: {
-      title: project.title,
-      description: project.description,
-      images: [project.coverImage],
-    },
-  };
+  return { title: "Project Case Study — Shashidhar P C" };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
@@ -47,9 +51,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const userAgent = reqHeaders.get("user-agent") || "";
   const dnt = reqHeaders.get("dnt") === "1";
 
-  const project = await prisma.project.findUnique({
-    where: { slug },
-  });
+  let project = null;
+  try {
+    project = await prisma.project.findUnique({
+      where: { slug },
+    });
+  } catch (err) {
+    console.warn("Database lookup failed for project:", slug, err);
+  }
 
   if (!project) {
     notFound();

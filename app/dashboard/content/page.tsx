@@ -1,18 +1,29 @@
 import { prisma } from "@/lib/db";
 import { ContentManager } from "@/components/dashboard/content-manager";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardContentPage() {
-  const [profile, categories] = await Promise.all([
-    prisma.profile.findFirst({ where: { id: "default" } }),
-    prisma.skillCategory.findMany({
-      orderBy: { order: "asc" },
-      include: {
-        skills: {
-          orderBy: { order: "asc" },
+  let profile = null;
+  let categories: any[] = [];
+
+  try {
+    const res = await Promise.all([
+      prisma.profile.findFirst({ where: { id: "default" } }),
+      prisma.skillCategory.findMany({
+        orderBy: { order: "asc" },
+        include: {
+          skills: {
+            orderBy: { order: "asc" },
+          },
         },
-      },
-    }),
-  ]);
+      }),
+    ]);
+    profile = res[0];
+    categories = res[1] || [];
+  } catch (err) {
+    console.warn("Could not load content from database:", err);
+  }
 
   const defaultProfile = profile ?? {
     fullName: "Shashidhar P C",

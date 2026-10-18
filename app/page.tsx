@@ -27,25 +27,38 @@ export default async function PortfolioHomePage() {
     dnt,
   });
 
-  // Concurrent queries from Database
-  const [profile, categories, experiences, projects] = await Promise.all([
-    prisma.profile.findFirst({ where: { id: "default" } }),
-    prisma.skillCategory.findMany({
-      orderBy: { order: "asc" },
-      include: {
-        skills: {
-          orderBy: { order: "asc" },
+  // Concurrent queries from Database with safe fallback
+  let profile = null;
+  let categories: any[] = [];
+  let experiences: any[] = [];
+  let projects: any[] = [];
+
+  try {
+    const [p, c, e, pr] = await Promise.all([
+      prisma.profile.findFirst({ where: { id: "default" } }),
+      prisma.skillCategory.findMany({
+        orderBy: { order: "asc" },
+        include: {
+          skills: {
+            orderBy: { order: "asc" },
+          },
         },
-      },
-    }),
-    prisma.experience.findMany({
-      orderBy: { order: "asc" },
-    }),
-    prisma.project.findMany({
-      where: { published: true },
-      orderBy: { order: "asc" },
-    }),
-  ]);
+      }),
+      prisma.experience.findMany({
+        orderBy: { order: "asc" },
+      }),
+      prisma.project.findMany({
+        where: { published: true },
+        orderBy: { order: "asc" },
+      }),
+    ]);
+    profile = p;
+    categories = c || [];
+    experiences = e || [];
+    projects = pr || [];
+  } catch (err) {
+    console.warn("Database unavailable during build or request; using verified static portfolio data.", err);
+  }
 
   const profileData = profile ?? {
     fullName: "Shashidhar P C",

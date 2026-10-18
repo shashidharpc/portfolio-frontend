@@ -1,10 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 
 interface HeroProps {
   fullName: string;
@@ -14,108 +12,186 @@ interface HeroProps {
   socialLinks: {
     github?: string;
     linkedin?: string;
-    twitter?: string;
     email?: string;
+    phone?: string;
   };
 }
 
 export function PortfolioHero({
-  fullName,
-  title,
+  fullName = "Shashidhar P C",
+  title = "Full Stack Software Engineer",
   headline,
-  availableForHire,
+  availableForHire = true,
   socialLinks,
 }: HeroProps) {
+  const nameParts = fullName.split(" ");
+  const firstName = nameParts[0];
+  const restName = nameParts.slice(1).join(" ");
+
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-      {/* Ambient background glow orbs */}
-      <div
-        className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-[#7C3AED]/20 to-[#3B82F6]/15 blur-[120px] dark:from-[#7C3AED]/25 dark:to-[#3B82F6]/20 opacity-70 transition-opacity"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute top-1/2 -right-40 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#6366F1]/15 to-[#A78BFA]/10 blur-[130px] dark:from-[#6366F1]/20 dark:to-[#A78BFA]/15 opacity-60 transition-opacity"
-        aria-hidden="true"
-      />
+    <section id="hero" className="hero-section">
+      {/* Subtle organic texture */}
+      <div className="hero-noise" aria-hidden="true" />
+      <div className="hero-warm-glow" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-[1200px] px-6 sm:px-8">
-        <div className="flex flex-col items-start max-w-3xl">
-          {/* Availability Badge */}
-          {availableForHire && (
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-1.5 shadow-[0_2px_8px_rgba(20,18,43,0.03)] mb-8">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
-              <span className="text-xs font-medium text-[var(--foreground)]">
-                Available for architecture & fullstack projects
-              </span>
+      <div className="hero-container">
+        {/* ─── LEFT COLUMN: TEXT CONTENT ─── */}
+        <div className="hero-left">
+          {/* Subtitle / Kicker */}
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="hero-kicker"
+          >
+            <span>FULL-STACK DEVELOPER</span>
+            <span className="hero-kicker-dot" />
+            <span>AI &amp; DATABASE SYSTEMS</span>
+          </motion.div>
+
+          {/* Main Display Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="hero-heading"
+          >
+            <span className="hero-heading-greeting">Hi, I&apos;m</span>
+            <span className="hero-heading-name">
+              <span>{firstName}</span>
+              {restName && (
+                <span className="inline-block whitespace-nowrap">&nbsp;{restName}</span>
+              )}
+            </span>
+          </motion.h1>
+
+          {/* Bio / Headline */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="hero-headline"
+          >
+            I build web products from the interface to the API, and work on secure, scalable database and AI-powered solutions.
+          </motion.p>
+
+          {/* Location Badge */}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="hero-location"
+          >
+            <MapPin className="hero-location-pin" />
+            <span>Bengaluru, India</span>
+          </motion.div>
+
+          {/* Action CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="hero-cta-row"
+          >
+            <a href="#contact" className="hero-cta-primary group">
+              <span>Let&apos;s talk</span>
+              <ArrowRight className="w-4 h-4 hero-cta-arrow" />
+            </a>
+
+            <a href="#projects" className="hero-cta-secondary group">
+              <span>View my work</span>
+              <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* ─── RIGHT COLUMN: PORTRAIT & FLOATING ELEMENTS ─── */}
+        <div className="hero-right">
+          <div className="relative flex flex-col items-center justify-center w-full max-w-[500px] sm:max-w-[560px]">
+            {/* Hand-drawn whimsical curved arrow pointing directly to the skills card */}
+            <div className="absolute -top-2 right-20 sm:right-28 lg:right-32 z-30 pointer-events-none hidden sm:block">
+              <svg
+                className="w-14 h-12 text-[#18181B] dark:text-neutral-300"
+                viewBox="0 0 54 46"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 36 C 14 10, 36 6, 48 16" />
+                <path d="M42 8 L 48 16 L 38 18" />
+              </svg>
             </div>
-          )}
 
-          {/* Title and Intro */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--foreground)] leading-[1.1] mb-6">
-            Hi, I&apos;m <span className="text-gradient">{fullName}</span>.
-            <br />
-            <span className="text-[var(--foreground-secondary)] text-3xl sm:text-4xl md:text-5xl font-semibold">
-              {title}
-            </span>
-          </h1>
+            {/* Floating Top-Right Skills Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.88, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-1 -right-2 sm:-right-4 z-30 bg-white/95 dark:bg-[#1C182A]/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] border border-neutral-200/70 dark:border-neutral-800"
+            >
+              <ul className="space-y-2 text-xs sm:text-sm font-medium font-mono text-neutral-800 dark:text-neutral-200">
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+                  <span>Developer</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+                  <span>Problem Solver</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+                  <span>Lifelong Learner</span>
+                </li>
+              </ul>
+            </motion.div>
 
-          {/* Headline Value Statement */}
-          <p className="text-lg sm:text-xl text-[var(--foreground-secondary)] leading-relaxed max-w-2xl mb-10">
-            {headline}
-          </p>
+            {/* Studio Cutout Portrait: Clean Black & White with smooth hover transition to color */}
+            <div className="relative z-10 w-[290px] sm:w-[380px] lg:w-[440px] flex items-end justify-center select-none group cursor-pointer">
+              <motion.img
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                src="/portrait-cutout.png"
+                alt={`${fullName} Portrait`}
+                className="w-full h-auto object-contain max-h-[530px] drop-shadow-xl filter grayscale contrast-115 brightness-95 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500 ease-out"
+              />
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4 mb-12">
-            <Button asChild size="lg" className="gap-2">
-              <Link href="#projects">
-                View Selected Work
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="#contact">Get in Touch</Link>
-            </Button>
-          </div>
+              {/* Bottom Subtle Gradient Fade */}
+              <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[var(--background)] to-transparent z-15 pointer-events-none" />
+            </div>
 
-          {/* Social Badges */}
-          <div className="flex items-center gap-3 pt-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground-muted)] mr-2">
-              Connect:
-            </span>
-            {socialLinks.github && (
-              <a
-                href={socialLinks.github}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--card)] text-[var(--foreground-secondary)] hover:text-[#7C3AED] hover:border-[#7C3AED]/40 hover:shadow-sm transition-all"
-                aria-label="GitHub Profile"
-              >
-                <GithubIcon className="h-4 w-4" />
-              </a>
-            )}
-            {socialLinks.linkedin && (
-              <a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--card)] text-[var(--foreground-secondary)] hover:text-[#7C3AED] hover:border-[#7C3AED]/40 hover:shadow-sm transition-all"
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedinIcon className="h-4 w-4" />
-              </a>
-            )}
-            {socialLinks.email && (
-              <a
-                href={`mailto:${socialLinks.email}`}
-                className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--card)] text-[var(--foreground-secondary)] hover:text-[#7C3AED] hover:border-[#7C3AED]/40 hover:shadow-sm transition-all"
-                aria-label="Send Email"
-              >
-                <Mail className="h-4 w-4" />
-              </a>
-            )}
+            {/* Handwritten Signature: "shashi" */}
+            <motion.div
+              initial={{ opacity: 0, y: 12, rotate: -4 }}
+              animate={{ opacity: 1, y: 0, rotate: -4 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="relative z-20 -mt-2 sm:-mt-3 flex flex-col items-center select-none"
+            >
+              <div className="relative group cursor-pointer flex flex-col items-center">
+                <span className="font-signature text-5xl sm:text-6xl lg:text-7xl text-[#18181B] dark:text-neutral-100 font-normal tracking-wide transition-all duration-300 group-hover:text-[#FF5722] dark:group-hover:text-[#FF6E40] group-hover:scale-105">
+                  shashi
+                </span>
+                {/* Handwritten ink underline flourish */}
+                <svg
+                  className="w-36 sm:w-48 h-4 text-[#FF5722] -mt-2 sm:-mt-3 opacity-85 group-hover:opacity-100 transition-opacity"
+                  viewBox="0 0 160 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 10C35 4 80 2 155 7C118 12 85 14 45 14"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

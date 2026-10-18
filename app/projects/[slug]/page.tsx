@@ -81,9 +81,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   }
 
   const profile = await prisma.profile.findFirst({ where: { id: "default" } });
-  let socialLinks = {};
+  let socialLinks = {
+    github: "https://github.com/shashidharpc",
+    linkedin: "https://linkedin.com/in/shashidharpc",
+    email: "shashidharpc1012@gmail.com",
+    phone: "+91 7349128889",
+  };
   try {
-    socialLinks = profile?.socialLinks ? JSON.parse(profile.socialLinks) : {};
+    if (profile?.socialLinks) {
+      socialLinks = JSON.parse(profile.socialLinks);
+    }
   } catch {
     // fallback
   }

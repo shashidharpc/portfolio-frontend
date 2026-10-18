@@ -1,33 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-  weight: ["500", "600", "700", "800"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "500"],
-});
+import { PageTransitionWrapper } from "@/components/portfolio/page-transition";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-    { media: "(prefers-color-scheme: dark)", color: "#0C0A17" },
+    { media: "(prefers-color-scheme: light)", color: "#FDFDFE" },
+    { media: "(prefers-color-scheme: dark)", color: "#090812" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -35,19 +14,24 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Shashidhar P C | Senior Fullstack Engineer & Distributed Systems",
+    default: "Shashidhar P C | Full Stack Software Engineer",
     template: "%s | Shashidhar P C",
   },
   description:
-    "Production-grade personal portfolio and technical workspace of Shashidhar P C, Senior Fullstack Engineer specializing in Next.js 15, TypeScript, cloud architecture, and design systems.",
+    "Portfolio of Shashidhar P C, Full Stack Software Engineer experienced in developing secure, database-driven web applications using Python, Flask, JavaScript, PHP, MySQL, and MongoDB.",
   keywords: [
-    "Fullstack Engineer",
-    "Next.js 15",
-    "React",
-    "TypeScript",
-    "Software Architect",
-    "Design Systems",
-    "Prisma",
+    "Shashidhar P C",
+    "Full Stack Software Engineer",
+    "Python",
+    "Flask",
+    "JavaScript",
+    "PHP",
+    "MySQL",
+    "MongoDB",
+    "REST APIs",
+    "Role Based Access Control",
+    "Bengaluru",
+    "MCA",
   ],
   authors: [{ name: "Shashidhar P C" }],
   creator: "Shashidhar P C",
@@ -55,17 +39,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "http://localhost:3000",
-    title: "Shashidhar P C | Senior Fullstack Engineer",
+    title: "Shashidhar P C | Full Stack Software Engineer",
     description:
-      "Crafting resilient cloud architectures, high-performance web applications, and intuitive developer experiences.",
+      "Developing secure, database-driven web applications using Python, Flask, JavaScript, and PHP. Skilled in REST APIs, RBAC, MySQL, and MongoDB.",
     siteName: "Shashidhar P C Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shashidhar P C | Senior Fullstack Engineer",
+    title: "Shashidhar P C | Full Stack Software Engineer",
     description:
-      "Crafting resilient cloud architectures, high-performance web applications, and intuitive developer experiences.",
-    creator: "@shashidharpc",
+      "Developing secure, database-driven web applications using Python, Flask, JavaScript, and PHP.",
   },
 };
 
@@ -78,22 +61,24 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${jakarta.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className="light"
     >
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-[#7C3AED]/20 selection:text-[#7C3AED]">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-[#FF5722]/20 selection:text-[#FF5722]">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange={false}
         >
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-[#14122B] focus:shadow-md focus:rounded-md focus:ring-2 focus:ring-[#7C3AED]"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#FF5722] focus:text-white focus:shadow-lg focus:rounded-md"
           >
             Skip to main content
           </a>
-          {children}
+
+          {/* Page Transition Wrapper */}
+          <PageTransitionWrapper>{children}</PageTransitionWrapper>
         </ThemeProvider>
       </body>
     </html>

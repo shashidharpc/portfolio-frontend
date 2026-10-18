@@ -4,9 +4,10 @@ import { headers } from "next/headers";
 import { PortfolioNavbar } from "@/components/portfolio/navbar";
 import { PortfolioHero } from "@/components/portfolio/hero";
 import { PortfolioAbout } from "@/components/portfolio/about-section";
+import { PortfolioExperienceEducation } from "@/components/portfolio/experience-education-section";
 import { PortfolioSkills } from "@/components/portfolio/skills-section";
-import { PortfolioExperience } from "@/components/portfolio/experience-section";
 import { PortfolioProjectsGrid } from "@/components/portfolio/projects-grid";
+import { PortfolioCertifications } from "@/components/portfolio/certifications-section";
 import { PortfolioContactForm } from "@/components/portfolio/contact-form";
 import { PortfolioFooter } from "@/components/portfolio/footer";
 
@@ -48,23 +49,25 @@ export default async function PortfolioHomePage() {
 
   const profileData = profile ?? {
     fullName: "Shashidhar P C",
-    title: "Senior Fullstack Engineer & Distributed Systems Designer",
+    title: "Full Stack Software Engineer",
     headline:
-      "Crafting resilient cloud architectures, high-performance web applications, and intuitive developer experiences.",
-    bio: "Senior engineer with 8+ years of engineering experience architecting scalable fullstack web applications, event-driven microservices, and design systems.",
-    location: "Bengaluru, India",
+      "Developing secure, database-driven web applications using Python, Flask, JavaScript, and PHP. Skilled in architecting REST APIs, implementing Role-Based Access Control, and designing scalable MySQL & MongoDB schemas.",
+    bio: "Full Stack Software Engineer based in Bengaluru with a strong foundation in Data Structures, Algorithms, Object Oriented Design, and the full Software Development Life Cycle (SDLC). Experienced in developing secure, multi-tier web platforms with Python, Flask, PHP, JavaScript, and modern database architectures. Master of Computer Applications (MCA) graduate from Presidency College (8.75 CGPA) and BCA graduate from Sahyadri Science College (89.86%). Proven track record through production web application development, including automated QR code & geofencing attendance architectures and multi-tier vehicle rental systems.",
+    location: "Bengaluru, Karnataka, India",
     availableForHire: true,
     socialLinks: JSON.stringify({
       github: "https://github.com/shashidharpc",
       linkedin: "https://linkedin.com/in/shashidharpc",
-      email: "shashidharpc10@gmail.com",
+      email: "shashidharpc1012@gmail.com",
+      phone: "+91 7349128889",
     }),
   };
 
   let socialLinks = {
     github: "https://github.com/shashidharpc",
     linkedin: "https://linkedin.com/in/shashidharpc",
-    email: "shashidharpc10@gmail.com",
+    email: "shashidharpc1012@gmail.com",
+    phone: "+91 7349128889",
   };
 
   try {
@@ -81,10 +84,7 @@ export default async function PortfolioHomePage() {
     jobTitle: profileData.title,
     description: profileData.headline,
     url: "http://localhost:3000",
-    sameAs: [
-      socialLinks.github,
-      socialLinks.linkedin,
-    ].filter(Boolean),
+    sameAs: [socialLinks.github, socialLinks.linkedin].filter(Boolean),
   };
 
   return (
@@ -106,8 +106,6 @@ export default async function PortfolioHomePage() {
           socialLinks={socialLinks}
         />
 
-        <PortfolioProjectsGrid projects={projects} />
-
         <PortfolioAbout
           bio={profileData.bio}
           location={profileData.location}
@@ -116,7 +114,11 @@ export default async function PortfolioHomePage() {
 
         <PortfolioSkills categories={categories} />
 
-        <PortfolioExperience experiences={experiences} />
+        <PortfolioExperienceEducation experiences={experiences} />
+
+        <PortfolioProjectsGrid projects={projects} />
+
+        <PortfolioCertifications />
 
         <PortfolioContactForm />
       </main>

@@ -1,6 +1,22 @@
+"use client";
+
 import * as React from "react";
+import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, Clock, Globe, MapPin, Terminal } from "lucide-react";
+import {
+  CheckCircle2,
+  Clock,
+  Globe,
+  MapPin,
+  Terminal,
+  ShieldCheck,
+  Database,
+  QrCode,
+  Award,
+  Layers,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 interface AboutProps {
   bio: string;
@@ -9,71 +25,177 @@ interface AboutProps {
 }
 
 export function PortfolioAbout({ bio, location, availableForHire }: AboutProps) {
+  const stats = [
+    { label: "MCA CGPA", value: "8.75", highlight: "Presidency College" },
+    { label: "BCA Percentage", value: "89.86%", highlight: "First Class Distinction" },
+    { label: "Production Platforms", value: "3+", highlight: "Flask, PHP, MongoDB" },
+    { label: "Certifications", value: "4", highlight: "IBM, UMich, Coursera" },
+  ];
+
+  const pillars = [
+    {
+      icon: Terminal,
+      title: "Secure Python & Flask APIs",
+      description:
+        "Modular blueprint architectures, RESTful API design, request sanitization, and robust transactional session management.",
+      color: "text-[#8B5CF6]",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Granular RBAC Authorization",
+      description:
+        "Multi-tier Role-Based Access Control isolating administrative, instructor, and student dashboards with session integrity.",
+      color: "text-[#3B82F6]",
+    },
+    {
+      icon: Database,
+      title: "Scalable MySQL & MongoDB",
+      description:
+        "Normalized relational schemas with primary/foreign key indexing in MySQL alongside flexible document models in MongoDB.",
+      color: "text-emerald-400",
+    },
+    {
+      icon: QrCode,
+      title: "Dynamic QR & Geofence Verification",
+      description:
+        "Temporal algorithm design with real-time QR code expiration and client-side HTML5 Geolocation polygon verification.",
+      color: "text-amber-400",
+    },
+  ];
+
   return (
-    <section id="about" className="py-24 border-t border-[var(--border)]">
-      <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
-        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
-          {/* Left Column: Heading and Context */}
-          <div className="md:w-1/3 flex flex-col">
-            <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#7C3AED] mb-2">
-              01 // Background
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)] mb-4">
-              Engineering with precision, empathy, and scale.
-            </h2>
-            <div className="flex flex-col gap-3 mt-4 text-sm text-[var(--foreground-secondary)]">
-              {location && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-[#7C3AED]" />
-                  <span>Based in {location}</span>
+    <section id="about" className="py-24 border-t border-[var(--border)] relative">
+      <div className="mx-auto max-w-[1240px] px-6 sm:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col mb-16">
+          <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#8B5CF6] mb-2">
+            01 // Engineering Profile
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+            About & Core Technical Philosophy
+          </h2>
+          <p className="text-sm sm:text-base text-[var(--foreground-secondary)] max-w-2xl mt-3 leading-relaxed">
+            Bridging strong computer science fundamentals in Data Structures, Algorithms, and Object-Oriented Design with production full-stack execution.
+          </p>
+        </div>
+
+        {/* Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Context, Location & Quick Contacts */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-5 flex flex-col gap-6"
+          >
+            <div className="rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-sm">
+              <h3 className="text-lg font-bold text-[var(--foreground)] mb-4 flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#8B5CF6]" />
+                Full Stack Software Engineer
+              </h3>
+
+              <div className="flex flex-col gap-3.5 text-sm text-[var(--foreground-secondary)] mb-6">
+                <div className="flex items-center gap-2.5">
+                  <MapPin className="h-4 w-4 text-[#8B5CF6] shrink-0" />
+                  <span>{location || "Bengaluru, Karnataka, India"}</span>
                 </div>
-              )}
-              <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-[#3B82F6]" />
-                <span>Working across Global Timezones</span>
+                <div className="flex items-center gap-2.5">
+                  <Globe className="h-4 w-4 text-[#3B82F6] shrink-0" />
+                  <span>Ready for Onsite & Hybrid Roles</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Mail className="h-4 w-4 text-purple-400 shrink-0" />
+                  <a
+                    href="mailto:shashidharpc1012@gmail.com"
+                    className="hover:text-[#8B5CF6] transition-colors"
+                  >
+                    shashidharpc1012@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Phone className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <a
+                    href="tel:+917349128889"
+                    className="hover:text-emerald-400 transition-colors"
+                  >
+                    +91 7349128889
+                  </a>
+                </div>
+                <div className="flex items-center gap-2.5 pt-2 border-t border-[var(--border-subtle)]">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span className="text-emerald-400 font-medium">
+                    {availableForHire
+                      ? "Available for Software Engineering Roles"
+                      : "Engaged in Project"}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                <span>
-                  {availableForHire ? "Currently accepting select engagements" : "Engaged in full-time role"}
-                </span>
+
+              {/* Fast Stats Mini Grid */}
+              <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[var(--border-subtle)]">
+                {stats.map((st, i) => (
+                  <div
+                    key={i}
+                    className="rounded-[12px] bg-[var(--surface-hover)] p-3 border border-[var(--border-subtle)]"
+                  >
+                    <div className="text-xl sm:text-2xl font-black font-jakarta text-[var(--foreground)]">
+                      {st.value}
+                    </div>
+                    <div className="text-[11px] font-medium text-[var(--foreground-muted)] uppercase tracking-wider">
+                      {st.label}
+                    </div>
+                    <div className="text-[10px] text-[#8B5CF6] font-mono mt-0.5">
+                      {st.highlight}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Bio and Core Engineering Pillars */}
-          <div className="md:w-2/3 flex flex-col">
-            <p className="text-base sm:text-lg text-[var(--foreground)] leading-relaxed mb-8 max-w-[70ch]">
-              {bio}
-            </p>
+          {/* Right Column: Bio Narrative & Architectural Pillars */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-7 flex flex-col"
+          >
+            <div className="text-base sm:text-lg text-[var(--foreground)] leading-relaxed mb-8 space-y-4">
+              <p>
+                {bio}
+              </p>
+              <p className="text-sm sm:text-base text-[var(--foreground-secondary)] leading-relaxed">
+                Skilled in designing end-to-end architectures where database normalization, query speed, and data security are top priorities. Dedicated to clean code, modular Python blueprints, robust PHP transactional pipelines, and intuitive user interfaces built with modern HTML5, CSS3, and JavaScript.
+              </p>
+            </div>
 
-            {/* Engineering Pillars Grid */}
+            {/* Architectural Pillars Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="p-5 border-[var(--border)] bg-[var(--surface)] hover:border-[#7C3AED]/30 transition-all">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <Terminal className="h-4 w-4 text-[#7C3AED]" />
-                  <h3 className="font-semibold text-sm text-[var(--foreground)]">
-                    Type-Safe Fullstack Systems
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-[var(--foreground-secondary)] leading-relaxed">
-                  End-to-end TypeScript validation from database schemas (Prisma/PostgreSQL) to API boundaries and React Server Components.
-                </p>
-              </Card>
-
-              <Card className="p-5 border-[var(--border)] bg-[var(--surface)] hover:border-[#7C3AED]/30 transition-all">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <Clock className="h-4 w-4 text-[#3B82F6]" />
-                  <h3 className="font-semibold text-sm text-[var(--foreground)]">
-                    Observability & High Performance
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-[var(--foreground-secondary)] leading-relaxed">
-                  Fast page loads, strict 95+ Core Web Vitals, structured logging with Pino, and sub-second database query execution.
-                </p>
-              </Card>
+              {pillars.map((pil, idx) => {
+                const IconComponent = pil.icon;
+                return (
+                  <Card
+                    key={idx}
+                    className="p-5 border-[var(--border)] bg-[var(--card)] hover:border-[#8B5CF6]/40 hover:shadow-[0_8px_25px_rgba(139,92,246,0.08)] transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-3 mb-2.5">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[var(--surface-hover)] group-hover:scale-110 transition-transform">
+                        <IconComponent className={`h-4.5 w-4.5 ${pil.color}`} />
+                      </div>
+                      <h3 className="font-semibold text-sm text-[var(--foreground)] group-hover:text-[#8B5CF6] transition-colors">
+                        {pil.title}
+                      </h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[var(--foreground-secondary)] leading-relaxed">
+                      {pil.description}
+                    </p>
+                  </Card>
+                );
+              })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -3,8 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { Lock, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export function PortfolioNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -12,140 +11,87 @@ export function PortfolioNavbar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { label: "Home", href: "#" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact", isHighlight: true },
+  ];
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)] shadow-[0_1px_3px_rgba(20,18,43,0.03)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-18 max-w-[1200px] items-center justify-between px-6 sm:px-8">
-        {/* Brand */}
+    <header className="fixed top-4 sm:top-5 left-0 right-0 z-50 px-4 pointer-events-none transition-all duration-300">
+      <div
+        className={`mx-auto max-w-4xl flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-full floating-glass-nav ${
+          scrolled ? "is-scrolled" : ""
+        } pointer-events-auto`}
+      >
+        {/* Brand: Shashidhar P C • */}
         <Link
           href="/"
-          className="group flex items-center gap-2.5 font-bold tracking-tight text-lg text-[var(--foreground)]"
+          className="group flex items-center gap-1.5 font-bold text-sm sm:text-base tracking-tight text-[#18181B] dark:text-white transition-opacity hover:opacity-85"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-gradient-to-tr from-[#7C3AED] to-[#3B82F6] text-white font-mono text-sm shadow-[0_2px_8px_rgba(124,58,237,0.3)] group-hover:scale-105 transition-transform">
-            SP
-          </span>
-          <span className="font-semibold text-[var(--foreground)] group-hover:text-[#7C3AED] transition-colors">
-            Shashidhar<span className="text-[#7C3AED]">.dev</span>
-          </span>
+          <span>Shashidhar P C</span>
+          <span className="w-2 h-2 rounded-full bg-[#FF5722] inline-block mb-0.5 shadow-[0_0_8px_rgba(255,87,34,0.6)] animate-pulse" />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="#projects"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[#7C3AED] transition-colors"
-          >
-            Projects
-          </Link>
-          <Link
-            href="#about"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[#7C3AED] transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="#skills"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[#7C3AED] transition-colors"
-          >
-            Skills
-          </Link>
-          <Link
-            href="#experience"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[#7C3AED] transition-colors"
-          >
-            Experience
-          </Link>
-          <Link
-            href="#contact"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[#7C3AED] transition-colors"
-          >
-            Contact
-          </Link>
+        {/* Center Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={`px-3.5 py-1.5 rounded-full transition-all duration-200 ${
+                link.isHighlight
+                  ? "text-[#FF5722] font-semibold hover:bg-[#FF5722]/10"
+                  : "text-neutral-600 dark:text-neutral-300 hover:text-[#18181B] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Actions */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Right Action: Theme Toggle & Mobile Menu */}
+        <div className="flex items-center gap-1.5">
           <ThemeToggle />
-          <Button asChild variant="outline" size="sm" className="gap-2 text-xs">
-            <Link href="/dashboard">
-              <Lock className="h-3.5 w-3.5 text-[#7C3AED]" />
-              Dashboard
-            </Link>
-          </Button>
-        </div>
 
-        {/* Mobile menu trigger */}
-        <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="iconSm"
+          {/* Mobile hamburger icon */}
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-1.5 text-neutral-700 dark:text-neutral-300 hover:text-[#FF5722] focus:outline-none rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[var(--border)] bg-[var(--card)] px-6 py-6 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-4">
-            <Link
-              href="#projects"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[var(--foreground)] hover:text-[#7C3AED]"
-            >
-              Projects
-            </Link>
-            <Link
-              href="#about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[var(--foreground)] hover:text-[#7C3AED]"
-            >
-              About
-            </Link>
-            <Link
-              href="#skills"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[var(--foreground)] hover:text-[#7C3AED]"
-            >
-              Skills
-            </Link>
-            <Link
-              href="#experience"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[var(--foreground)] hover:text-[#7C3AED]"
-            >
-              Experience
-            </Link>
-            <Link
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[var(--foreground)] hover:text-[#7C3AED]"
-            >
-              Contact
-            </Link>
-            <div className="pt-2">
-              <Button asChild variant="outline" className="w-full gap-2">
-                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Lock className="h-4 w-4 text-[#7C3AED]" />
-                  Dashboard Admin
-                </Link>
-              </Button>
-            </div>
+        <div className="mx-auto max-w-4xl mt-2 rounded-3xl floating-glass-nav p-5 md:hidden pointer-events-auto animate-in fade-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col space-y-1.5 font-medium">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-4 py-2 rounded-2xl text-sm transition-colors ${
+                  link.isHighlight
+                    ? "text-[#FF5722] font-semibold bg-[#FF5722]/10"
+                    : "text-neutral-700 dark:text-neutral-200 hover:text-[#FF5722] hover:bg-black/5 dark:hover:bg-white/5"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </div>
       )}

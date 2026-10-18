@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Starting database seed...");
+  console.log("🌱 Starting database seed with Shashidhar P C's resume data...");
 
   // 1. Clean existing records (idempotent seed)
   await prisma.auditLog.deleteMany();
@@ -24,7 +24,7 @@ async function main() {
   const hashedPassword = await bcrypt.hash("adminpassword123", 10);
   const adminUser = await prisma.user.create({
     data: {
-      email: "admin@portfolio.dev",
+      email: "shashidharpc1012@gmail.com",
       name: "Shashidhar P C",
       passwordHash: hashedPassword,
       role: "ADMIN",
@@ -60,71 +60,72 @@ async function main() {
     data: {
       id: "default",
       fullName: "Shashidhar P C",
-      title: "Senior Fullstack Engineer & Distributed Systems Designer",
+      title: "Full Stack Software Engineer",
       headline:
-        "Building resilient cloud architectures, high-performance web applications, and intuitive developer experiences.",
-      bio: "Senior engineer with 8+ years of expertise spanning modern full-stack TypeScript, React Server Components, distributed systems, and design systems. Committed to writing type-safe, accessible, and high-performance software that solves meaningful problems at scale.",
-      avatarUrl:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80",
+        "Developing secure, database-driven web applications using Python, Flask, JavaScript, and PHP. Skilled in architecting REST APIs, implementing Role-Based Access Control, and designing scalable MySQL & MongoDB schemas.",
+      bio: "Full Stack Software Engineer based in Bengaluru with a strong foundation in Data Structures, Algorithms, Object Oriented Design, and the full Software Development Life Cycle (SDLC). Experienced in engineering secure, multi-tier web platforms with Python, Flask, PHP, JavaScript, and modern database architectures. Master of Computer Applications (MCA) graduate from Presidency College (8.75 CGPA) and BCA graduate from Sahyadri Science College (89.86%). Proven track record through production web application development, including automated QR code & geofencing attendance architectures and multi-tier vehicle rental systems.",
+      avatarUrl: "/portrait.jpg",
       resumeUrl: "/resume.pdf",
-      location: "Bengaluru, India",
+      location: "Bengaluru, Karnataka, India",
       availableForHire: true,
       socialLinks: JSON.stringify({
         github: "https://github.com/shashidharpc",
         linkedin: "https://linkedin.com/in/shashidharpc",
-        twitter: "https://twitter.com/shashidharpc",
-        email: "shashidharpc10@gmail.com",
+        email: "shashidharpc1012@gmail.com",
+        phone: "+91 7349128889",
       }),
     },
   });
   console.log("✓ Profile data created");
 
-  // 5. Skill Categories & Skills
+  // 5. Skill Categories & Skills from Resume
   const skillData = [
     {
-      category: "Languages & Runtimes",
+      category: "Programming Languages",
       order: 0,
       skills: [
-        { name: "TypeScript", proficiency: 96, featured: true },
-        { name: "JavaScript (ESNext)", proficiency: 95, featured: true },
-        { name: "Node.js", proficiency: 92, featured: true },
-        { name: "Python", proficiency: 86, featured: false },
-        { name: "Go", proficiency: 80, featured: false },
-        { name: "SQL", proficiency: 90, featured: true },
+        { name: "Python", proficiency: 94, featured: true },
+        { name: "JavaScript", proficiency: 92, featured: true },
+        { name: "PHP", proficiency: 90, featured: true },
+        { name: "SQL", proficiency: 92, featured: true },
+        { name: "Java", proficiency: 84, featured: false },
+        { name: "C", proficiency: 80, featured: false },
       ],
     },
     {
-      category: "Frontend & UI Engineering",
+      category: "Backend & Web Frameworks",
       order: 1,
       skills: [
-        { name: "Next.js 15 (App Router)", proficiency: 96, featured: true },
-        { name: "React 19 & Server Components", proficiency: 95, featured: true },
-        { name: "Tailwind CSS v4", proficiency: 94, featured: true },
-        { name: "Framer Motion", proficiency: 88, featured: true },
-        { name: "Radix Primitives & shadcn/ui", proficiency: 92, featured: true },
-        { name: "Accessibility (WCAG AA)", proficiency: 90, featured: false },
+        { name: "Flask", proficiency: 95, featured: true },
+        { name: "REST APIs Architecture", proficiency: 94, featured: true },
+        { name: "Role-Based Access Control (RBAC)", proficiency: 93, featured: true },
+        { name: "HTML5 & Semantic Web", proficiency: 95, featured: true },
+        { name: "CSS3 & Modern Layouts", proficiency: 92, featured: true },
+        { name: "Bootstrap 5", proficiency: 92, featured: true },
       ],
     },
     {
-      category: "Backend & Persistence",
+      category: "Databases & Development Tools",
       order: 2,
       skills: [
-        { name: "PostgreSQL & SQLite", proficiency: 94, featured: true },
-        { name: "Prisma ORM", proficiency: 95, featured: true },
-        { name: "REST & GraphQL APIs", proficiency: 92, featured: false },
-        { name: "Redis Caching", proficiency: 88, featured: true },
-        { name: "Auth.js / NextAuth", proficiency: 90, featured: true },
+        { name: "MongoDB", proficiency: 93, featured: true },
+        { name: "MySQL", proficiency: 93, featured: true },
+        { name: "Git & Version Control", proficiency: 90, featured: true },
+        { name: "GitHub & Collaborative CI", proficiency: 90, featured: true },
+        { name: "Visual Studio Code", proficiency: 95, featured: false },
+        { name: "XAMPP Stack", proficiency: 88, featured: false },
       ],
     },
     {
-      category: "DevOps, Cloud & Architecture",
+      category: "Core Competencies & Engineering",
       order: 3,
       skills: [
-        { name: "Docker & Containerization", proficiency: 88, featured: true },
-        { name: "CI/CD & GitHub Actions", proficiency: 90, featured: true },
-        { name: "AWS Cloud Infrastructure", proficiency: 85, featured: false },
-        { name: "Vercel Edge Platform", proficiency: 94, featured: true },
-        { name: "Structured Logging & Observability", proficiency: 89, featured: false },
+        { name: "Object-Oriented Design (OOP)", proficiency: 94, featured: true },
+        { name: "Data Structures & Algorithms", proficiency: 90, featured: true },
+        { name: "CRUD Operations & Schemas", proficiency: 96, featured: true },
+        { name: "Authentication & Authorization", proficiency: 94, featured: true },
+        { name: "API Integration & SDLC", proficiency: 92, featured: true },
+        { name: "Troubleshooting & Debugging", proficiency: 90, featured: false },
       ],
     },
   ];
@@ -152,78 +153,34 @@ async function main() {
   }
   console.log("✓ Skill categories and skills created");
 
-  // 6. Work Experience Timeline
+  // 6. Work Experience Timeline from Resume
   const experiences = [
     {
-      company: "Aurora Cloud Technologies",
-      role: "Lead Fullstack & Systems Engineer",
-      location: "Bengaluru, India (Hybrid)",
-      startDate: new Date("2023-03-01"),
-      isCurrent: true,
+      company: "Innovant IT Solutions",
+      role: "Web Developer Intern",
+      location: "Bengaluru, India",
+      startDate: new Date("2024-06-01"),
+      endDate: new Date("2024-07-31"),
+      isCurrent: false,
       description:
-        "Spearheaded architectural transition of core SaaS platform to React Server Components and edge computing, delivering 42% latency reduction.",
+        "Architected and delivered fullstack features for multi-tier client web applications with PHP, JavaScript, and MySQL, focusing on relational data integrity and checkout workflows.",
       highlights: JSON.stringify([
-        "Designed and implemented distributed observability dashboard handling over 250,000 queries daily.",
-        "Architected zero-downtime database migration pipelines with Prisma and PostgreSQL.",
-        "Authored internal RFCs establishing component isolation and design token standards across 4 squads.",
+        "Architected and delivered a multi-tier Car Rental Management web platform utilizing PHP, JavaScript, and MySQL to streamline user registration and booking.",
+        "Engineered search and filtering modules allowing users to filter vehicles by category and reserve units over validated date ranges, preventing double booking errors.",
+        "Structured relational MySQL database tables, establishing primary/foreign key constraints and indexing schemas to optimize booking query retrieval speeds.",
+        "Implemented robust client and server side form validation mechanisms to sanitize user inputs and safeguard data integrity across transactional checkout paths.",
       ]),
       technologies: JSON.stringify([
-        "Next.js 15",
-        "TypeScript",
-        "Prisma",
-        "PostgreSQL",
-        "Tailwind CSS",
-        "Docker",
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Bootstrap",
+        "XAMPP",
+        "Form Validation",
       ]),
       order: 0,
-    },
-    {
-      company: "Apex Labs & Design Systems",
-      role: "Senior Frontend Architect",
-      location: "Remote",
-      startDate: new Date("2021-02-01"),
-      endDate: new Date("2023-02-28"),
-      isCurrent: false,
-      description:
-        "Led frontend engineering team building enterprise UI library and data visualization engines.",
-      highlights: JSON.stringify([
-        "Engineered accessible component library adhering strictly to WCAG AA guidelines, reducing team feature turnaround by 35%.",
-        "Optimized web vital scores across key funnel pages to maintain 98+ Lighthouse scores.",
-        "Spearheaded end-to-end testing strategy with Vitest and Playwright across CI pipelines.",
-      ]),
-      technologies: JSON.stringify([
-        "React",
-        "TypeScript",
-        "Radix UI",
-        "Tailwind CSS",
-        "Framer Motion",
-        "Storybook",
-      ]),
-      order: 1,
-    },
-    {
-      company: "Horizon Software Systems",
-      role: "Fullstack Software Engineer",
-      location: "Bengaluru, India",
-      startDate: new Date("2018-07-01"),
-      endDate: new Date("2021-01-31"),
-      isCurrent: false,
-      description:
-        "Built resilient transactional billing workflows, customer management microservices, and audit logging layers.",
-      highlights: JSON.stringify([
-        "Engineered audit compliance logging tracking all mutations with cryptographic IP verification.",
-        "Implemented Redis caching layers reducing peak database loads by 60%.",
-        "Constructed automated invoice generation processing 50k+ transactions monthly.",
-      ]),
-      technologies: JSON.stringify([
-        "Node.js",
-        "Express",
-        "PostgreSQL",
-        "Redis",
-        "Docker",
-        "Jest",
-      ]),
-      order: 2,
     },
   ];
 
@@ -232,103 +189,100 @@ async function main() {
   }
   console.log("✓ Work experience timeline created");
 
-  // 7. Projects
+  // 7. Projects from Resume
   const projects = [
     {
-      slug: "nexus-cloud-orchestrator",
-      title: "Nexus Cloud Orchestrator",
-      tagline: "Zero-config edge deployment and container mesh router.",
+      slug: "smart-attendance-management-system",
+      title: "Smart Attendance Management System",
+      tagline: "Dynamic QR Code generation & HTML5 Geofencing verification platform.",
       description:
-        "An enterprise-grade orchestration and telemetry platform providing real-time log ingestion, automated canary deployments, and multi-region DNS routing with sub-second health checks.",
+        "An automated attendance management platform designed to eradicate proxy sign-ins through multi-layer physical and temporal verification. Combines dynamic expiring QR codes, HTML5 Geolocation API coordinate validation against preset classroom geofences, and secure Role-Based Access Control (RBAC).",
       contentMdx: `## System Architecture & Motivation
-Nexus was built to bridge the gap between heavy enterprise Kubernetes clusters and lightweight serverless deployments. It provides an intuitive control plane for deploying microservices with instant canary rollbacks, automatic SSL provisioning, and real-time WebSocket telemetry.
+Traditional classroom attendance methods often suffer from proxy check-ins, manual tally errors, and excessive administrative overhead. The Smart Attendance Management System was engineered to eliminate proxy sign-ins completely through **multi-layer physical (geofencing) and temporal (dynamic QR) verification**.
 
 ### Core Technical Accomplishments
-- **Edge-first Routing**: Implemented dynamic traffic splitting algorithms supporting weight-based canary tests.
-- **Real-Time Telemetry**: Sub-50ms ingestion latency for distributed container logs streamed directly to the frontend.
-- **Resilient Fallback**: Automatic failover to secondary zones within 300ms of health check degradation.
+- **Dynamic Expiring QR Code Algorithms**: Implemented dynamic QR code generation with real-time expiration intervals, requiring on-site scanning via client mobile browsers to prevent screenshot sharing.
+- **HTML5 Geolocation Geofence Validation**: Engineered client-side coordinate capture validated against preset classroom polygonal and radial geofences on the Flask backend prior to authorizing check-in entries.
+- **Role-Based Access Control (RBAC)**: Designed isolated dashboards with secure session management for Administrators, Instructors, and Students.
+- **Bulk Roster Ingestion**: Engineered multi-row Excel and CSV data ingestion pipelines with automated data normalization.
+- **Automated Absence Notification Pipeline**: Built asynchronous SMTP mailer integration alerting students and parents on low attendance thresholds.
 
 ### Technology Stack
-- **Frontend & Admin UI**: Next.js 15, TypeScript, Tailwind CSS v4, Framer Motion
-- **Persistence & ORM**: PostgreSQL, Prisma ORM, Redis for cached routing tables
-- **Infrastructure**: Docker Engine API, Envoy Proxy, Go micro-agents
+- **Backend & Logic**: Python, Flask, REST APIs, Session Auth
+- **Database**: MongoDB (Flexible document schema for student records, timetable, and attendance logs)
+- **Frontend & UI**: HTML5 Geolocation API, JavaScript, Bootstrap 5, CSS3
+- **Tools**: Git, GitHub, VS Code
 `,
       coverImage:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80",
-      tags: JSON.stringify(["Next.js", "TypeScript", "Go", "Docker", "PostgreSQL", "Tailwind CSS"]),
-      liveUrl: "https://nexus-cloud.dev",
-      githubUrl: "https://github.com/shashidharpc/nexus-orchestrator",
+        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&auto=format&fit=crop&q=80",
+      tags: JSON.stringify(["Python", "Flask", "MongoDB", "JavaScript", "Geolocation API", "Bootstrap", "RBAC", "SMTP"]),
+      liveUrl: "https://github.com/shashidharpc",
+      githubUrl: "https://github.com/shashidharpc",
       featured: true,
       order: 0,
       published: true,
-      viewsCount: 1480,
+      viewsCount: 2450,
     },
     {
-      slug: "pulse-analytics-telemetry",
-      title: "Pulse Analytics Engine",
-      tagline: "Privacy-first real-time analytics with sub-second OLAP queries.",
+      slug: "task-manager-web-application",
+      title: "Task Manager Web Application",
+      tagline: "Full-stack project tracking web app with Flask and MongoDB.",
       description:
-        "High-throughput analytics engine processing millions of events daily without storing third-party cookies or intrusive device fingerprints. Respects Do Not Track and anonymizes IPs with cryptographic salts.",
-      contentMdx: `## Problem Space
-Modern web analytics are often bloated with third-party tracking cookies that compromise user privacy and slow down page performance. Pulse provides a 1.2KB script that delivers rich funnel insights while guaranteeing 100% GDPR and CCPA compliance.
+        "Developed a full stack project tracking web application utilizing Flask for modular routing and MongoDB for schema-flexible document persistence. Built end-to-end CRUD operations supporting task creation, priority assignment, and atomic updates across Todo, In Progress, and Completed states.",
+      contentMdx: `## Overview & Objectives
+A responsive productivity suite engineered to provide seamless task lifecycle tracking, project organization, and multi-user data isolation.
 
-### Performance Highlights
-- **Zero Layout Impact**: Ultra-lightweight asynchronous tracking script with zero render-blocking time.
-- **Salted IP Hashes**: IPs are hashed using daily rotating cryptographic salts, preventing persistent cross-session tracking while providing accurate daily unique visitor counts.
-- **OLAP Aggregations**: Pre-aggregated time-series views enabling instant query execution on dashboards.
+### Technical Highlights
+- **Modular Flask Blueprint Architecture**: Decoupled routing structure separating authentication, task operations, and user profile management.
+- **Schema-Flexible Persistence with MongoDB**: Leveraged MongoDB collections for fast document storage, nested task metadata, and dynamic tags.
+- **End-to-End CRUD Workflows**: Built instant create, read, update, and delete actions with atomic state transitions across *Todo*, *In Progress*, and *Completed*.
+- **Priority & Due Date Engine**: Dynamic color-coded priority flags (Low, Medium, High, Urgent) and chronological filtering.
+- **User Authorization Pipelines**: Secure session-based authentication ensuring complete workspace and data isolation across individual accounts.
+
+### Technology Stack
+- **Backend**: Python, Flask, Werkzeug Security
+- **Database**: MongoDB (PyMongo / Document Store)
+- **Frontend**: JavaScript, HTML5, CSS3, Bootstrap
 `,
       coverImage:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80",
-      tags: JSON.stringify(["React", "TypeScript", "Node.js", "Prisma", "SQLite", "Analytics"]),
-      liveUrl: "https://pulse-telemetry.io",
-      githubUrl: "https://github.com/shashidharpc/pulse-analytics",
+        "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&auto=format&fit=crop&q=80",
+      tags: JSON.stringify(["Python", "Flask", "MongoDB", "JavaScript", "HTML5", "CSS3", "CRUD", "Authentication"]),
+      liveUrl: "https://github.com/shashidharpc",
+      githubUrl: "https://github.com/shashidharpc",
       featured: true,
       order: 1,
       published: true,
-      viewsCount: 1120,
+      viewsCount: 1890,
     },
     {
-      slug: "krypton-design-system",
-      title: "Krypton Design System",
-      tagline: "Accessible, tokens-driven component library for high-density SaaS.",
+      slug: "car-rental-management-platform",
+      title: "Car Rental Management Web Platform",
+      tagline: "Multi-tier vehicle fleet booking system with relational MySQL schemas.",
       description:
-        "A comprehensive WCAG AA compliant design system built with Radix Primitives and Tailwind CSS v4, supporting dynamic CSS variable theming, dark mode, and zero layout shift.",
-      contentMdx: `## Design Philosophy
-Engineered for developer productivity and rigorous design consistency. Krypton features over 35 accessible primitives designed for data-intensive enterprise interfaces with keyboard navigation, visible focus rings, and screen-reader accessibility out of the box.
+        "Architected and delivered during internship at Innovant IT Solutions. Features multi-tier user registration and booking, category search and filtering, validated reservation date ranges to prevent double-booking errors, and normalized MySQL schemas.",
+      contentMdx: `## Enterprise Project Scope
+Engineered at Innovant IT Solutions to streamline vehicle fleet management, customer reservation requests, and payment checkout workflows.
 
-### Features
-- **4px/8px Grid Tokens**: Zero arbitrary values across margins, paddings, and typography scales.
-- **Fluid Micro-Animations**: GPU-accelerated motion tokens built on Framer Motion respecting user motion preferences.
-- **Dark Mode Architecture**: Contrast-tested HSL color tokens achieving WCAG AAA compliance.
+### Key Engineering Contributions
+- **Multi-Tier Role Hierarchy**: Administrative catalog management, vehicle availability dispatch, and customer booking portals.
+- **Reservation Date Range Validation**: Algorithmic overlap checks preventing double-booking errors across all active fleet units.
+- **Normalized Relational Schema**: Designed MySQL tables with strict primary/foreign key constraints and indexing for fast query response.
+- **Transactional Input Sanitization**: Client and server-side form validation safeguards defending against SQL injection and transactional data corruption.
+
+### Technology Stack
+- **Core**: PHP, MySQL, JavaScript
+- **Interface**: HTML5, CSS3, Bootstrap
+- **Environment**: XAMPP, Apache, phpMyAdmin
 `,
       coverImage:
-        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80",
-      tags: JSON.stringify(["React", "TypeScript", "Tailwind CSS", "Radix UI", "Framer Motion"]),
-      liveUrl: "https://krypton-ds.dev",
-      githubUrl: "https://github.com/shashidharpc/krypton-ui",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop&q=80",
+      tags: JSON.stringify(["PHP", "MySQL", "JavaScript", "Bootstrap", "Relational Schemas", "XAMPP"]),
+      liveUrl: "https://github.com/shashidharpc",
+      githubUrl: "https://github.com/shashidharpc",
       featured: true,
       order: 2,
       published: true,
-      viewsCount: 1820,
-    },
-    {
-      slug: "veloce-distributed-cache",
-      title: "Veloce Distributed Cache",
-      tagline: "Ultra-low latency in-memory cache layer with Raft consensus.",
-      description:
-        "High-performance distributed key-value store engineered for microservice state synchronization, achieving 180,000 ops/sec with consistent hashing and leader election.",
-      contentMdx: `## Distributed Systems Engineering
-Veloce explores distributed consensus over low-latency TCP connections. It provides atomic compare-and-swap operations, dynamic cluster membership rebalancing, and configurable snapshotting intervals.
-`,
-      coverImage:
-        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80",
-      tags: JSON.stringify(["Go", "Distributed Systems", "Raft", "TCP", "Concurrency"]),
-      liveUrl: "https://veloce-cache.dev",
-      githubUrl: "https://github.com/shashidharpc/veloce-cache",
-      featured: false,
-      order: 3,
-      published: true,
-      viewsCount: 740,
+      viewsCount: 1640,
     },
   ];
 
@@ -340,26 +294,15 @@ Veloce explores distributed consensus over low-latency TCP connections. It provi
   // 8. Initial Messages
   const messages = [
     {
-      name: "Sarah Jenkins",
-      email: "sarah.j@venturecapital.co",
-      subject: "Lead Fullstack Role & Advisory Opportunity",
+      name: "Engineering Recruiter",
+      email: "recruiter@innovativetech.in",
+      subject: "Full Stack Software Engineer Opportunity",
       message:
-        "Hi Shashidhar, I came across your Nexus Orchestrator project and was very impressed with your architecture. We are funding a high-scale developer tools startup and would love to discuss a potential lead engineering role or advisory collaboration.",
+        "Hi Shashidhar, we reviewed your work on the Smart Attendance System and your internship accomplishments at Innovant IT Solutions. Your strong background in Python, Flask, and database architecture is a great match for our engineering team. Let's connect!",
       isRead: false,
       isArchived: false,
       ipHash: "salt_9a8b7c6d5e",
-      createdAt: new Date(Date.now() - 3600 * 1000 * 4), // 4 hours ago
-    },
-    {
-      name: "Marcus Vance",
-      email: "m.vance@techscale.io",
-      subject: "Consulting Inquiry: Next.js 15 Migration & Performance",
-      message:
-        "Hello! Our team is currently planning a large-scale migration to Next.js 15 App Router and React Server Components. Are you available for a technical consultation or architecture audit over the coming month?",
-      isRead: true,
-      isArchived: false,
-      ipHash: "salt_1f2e3d4c5b",
-      createdAt: new Date(Date.now() - 3600 * 1000 * 28), // 28 hours ago
+      createdAt: new Date(Date.now() - 3600 * 1000 * 4),
     },
   ];
 
@@ -383,48 +326,7 @@ Veloce explores distributed consensus over low-latency TCP connections. It provi
     },
   });
 
-  await prisma.auditLog.create({
-    data: {
-      userId: adminUser.id,
-      action: "UPDATE",
-      entity: "Project",
-      entityId: "nexus-cloud-orchestrator",
-      beforeJson: JSON.stringify({ featured: false, viewsCount: 1400 }),
-      afterJson: JSON.stringify({ featured: true, viewsCount: 1480 }),
-      ipAddress: "127.0.0.1",
-      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-      createdAt: new Date(Date.now() - 3600 * 1000 * 1),
-    },
-  });
-
-  // 10. Initial Event Logs
-  await prisma.eventLog.create({
-    data: {
-      type: "PAGE_VIEW",
-      path: "/",
-      entityId: null,
-      metadata: JSON.stringify({ referrer: "github.com", device: "desktop" }),
-      ipHash: "salt_a1b2c3d4",
-      userAgent: "Mozilla/5.0",
-      dnt: false,
-      createdAt: new Date(Date.now() - 3600 * 1000 * 3),
-    },
-  });
-
-  await prisma.eventLog.create({
-    data: {
-      type: "PROJECT_VIEW",
-      path: "/projects/nexus-cloud-orchestrator",
-      entityId: "nexus-cloud-orchestrator",
-      metadata: JSON.stringify({ durationSeconds: 45 }),
-      ipHash: "salt_e5f6g7h8",
-      userAgent: "Mozilla/5.0",
-      dnt: false,
-      createdAt: new Date(Date.now() - 3600 * 1000 * 2),
-    },
-  });
-
-  console.log("🚀 Database successfully seeded with realistic production data!");
+  console.log("🚀 Database successfully seeded with Shashidhar P C's verified resume data!");
 }
 
 main()

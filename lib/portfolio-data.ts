@@ -224,7 +224,7 @@ Engineered a production-grade automated attendance solution to eliminate manual 
 - **Role-Based Access Control**: Multi-tier permissions across Student, Instructor, and Campus Administrator portals.
 - **Export Pipelines**: Automated generation of PDF & Excel attendance logs for administrative auditing.
     `,
-    coverImage: "/portrait-cutout.png",
+    coverImage: "/projects/attendance-system.jpg",
     category: "Full Stack",
     technologies: ["Python", "Flask", "JavaScript", "HTML5", "CSS3", "MySQL", "Geofencing", "QR Codes"],
     tags: JSON.stringify(["Python", "Flask", "JavaScript", "HTML5", "CSS3", "MySQL", "Geofencing", "QR Codes"]),
@@ -257,7 +257,7 @@ Comprehensive rental management platform built with PHP and relational MySQL sch
 - **Automated Billing Engine**: Dynamically calculates rental rates, insurance tiers, and late penalty adjustments.
 - **Customer Portal**: Self-service vehicle selection, booking confirmation, and digital invoicing.
     `,
-    coverImage: "/portrait-cutout.png",
+    coverImage: "/projects/wheelz-rental.jpg",
     category: "Full Stack",
     technologies: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Bootstrap"],
     tags: JSON.stringify(["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Bootstrap"]),

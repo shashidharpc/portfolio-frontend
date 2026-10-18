@@ -99,20 +99,20 @@ export function PortfolioExperienceEducation({ experiences = [] }: ExperienceEdu
   ];
 
   return (
-    <section id="experience" className="py-20 sm:py-28 border-t border-[var(--border)] relative bg-[var(--background)] transition-colors duration-300">
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-12">
+    <section id="experience" className="py-16 sm:py-28 border-t border-[var(--border)] relative bg-[var(--background)] transition-colors duration-300">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-12">
         {/* ─── SECTION HEADER ─── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col mb-14 sm:mb-18"
+          className="flex flex-col mb-10 sm:mb-18"
         >
           <span className="text-xs font-mono font-medium uppercase tracking-[0.22em] text-[var(--foreground-muted)] mb-3">
             BACKGROUND
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-jakarta font-extrabold tracking-tight text-[var(--foreground)]">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-jakarta font-extrabold tracking-tight text-[var(--foreground)]">
             Experience &amp; education.
           </h2>
         </motion.div>

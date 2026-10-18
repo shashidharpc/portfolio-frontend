@@ -130,33 +130,33 @@ export function PortfolioHero({
               initial={{ opacity: 0, scale: 0.88, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-1 -right-2 sm:-right-4 z-30 bg-white/95 dark:bg-[#1C182A]/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] border border-neutral-200/70 dark:border-neutral-800"
+              className="absolute top-1 right-0 sm:-right-4 z-30 bg-white/20 dark:bg-white/[0.07] backdrop-blur-xl rounded-2xl p-2.5 sm:p-4 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.25)] border border-white/30 dark:border-white/15 ring-1 ring-white/10"
             >
-              <ul className="space-y-2 text-xs sm:text-sm font-medium font-mono text-neutral-800 dark:text-neutral-200">
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+              <ul className="space-y-1.5 sm:space-y-2 text-[11px] sm:text-xs md:text-sm font-medium font-mono text-neutral-800 dark:text-neutral-200">
+                <li className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#FF5722]" />
                   <span>Developer</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+                <li className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#FF5722]" />
                   <span>Problem Solver</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
+                <li className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#FF5722]" />
                   <span>Lifelong Learner</span>
                 </li>
               </ul>
             </motion.div>
 
             {/* Studio Cutout Portrait: Clean Black & White with smooth hover transition to color */}
-            <div className="relative z-10 w-[290px] sm:w-[380px] lg:w-[440px] flex items-end justify-center select-none group cursor-pointer">
+            <div className="relative z-10 w-[230px] sm:w-[350px] lg:w-[440px] flex items-end justify-center select-none group cursor-pointer">
               <motion.img
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 src="/portrait-cutout.png"
                 alt={`${fullName} Portrait`}
-                className="w-full h-auto object-contain max-h-[530px] drop-shadow-xl filter grayscale contrast-115 brightness-95 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500 ease-out"
+                className="w-full h-auto object-contain max-h-[350px] sm:max-h-[460px] lg:max-h-[530px] drop-shadow-xl filter grayscale contrast-115 brightness-95 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500 ease-out"
               />
 
               {/* Bottom Subtle Gradient Fade */}
@@ -171,12 +171,12 @@ export function PortfolioHero({
               className="relative z-20 -mt-2 sm:-mt-3 flex flex-col items-center select-none"
             >
               <div className="relative group cursor-pointer flex flex-col items-center">
-                <span className="font-signature text-5xl sm:text-6xl lg:text-7xl text-[#18181B] dark:text-neutral-100 font-normal tracking-wide transition-all duration-300 group-hover:text-[#FF5722] dark:group-hover:text-[#FF6E40] group-hover:scale-105">
+                <span className="font-signature text-4xl sm:text-6xl lg:text-7xl text-[#18181B] dark:text-neutral-100 font-normal tracking-wide transition-all duration-300 group-hover:text-[#FF5722] dark:group-hover:text-[#FF6E40] group-hover:scale-105">
                   shashi
                 </span>
                 {/* Handwritten ink underline flourish */}
                 <svg
-                  className="w-36 sm:w-48 h-4 text-[#FF5722] -mt-2 sm:-mt-3 opacity-85 group-hover:opacity-100 transition-opacity"
+                  className="w-28 sm:w-48 h-3.5 sm:h-4 text-[#FF5722] -mt-1.5 sm:-mt-3 opacity-85 group-hover:opacity-100 transition-opacity"
                   viewBox="0 0 160 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

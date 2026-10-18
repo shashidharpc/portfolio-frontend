@@ -65,14 +65,14 @@ export function PortfolioAbout({ bio, location, availableForHire }: AboutProps) 
 
   return (
     <section id="about" className="py-24 border-t border-[var(--border)] relative">
-      <div className="mx-auto max-w-[1240px] px-6 sm:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-col mb-16">
+        <div className="flex flex-col mb-12 sm:mb-16">
           <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#8B5CF6] mb-2">
             01 // Engineering Profile
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
-            About & Core Technical Philosophy
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+            About &amp; Core Technical Philosophy
           </h2>
           <p className="text-sm sm:text-base text-[var(--foreground-secondary)] max-w-2xl mt-3 leading-relaxed">
             Bridging strong computer science fundamentals in Data Structures, Algorithms, and Object-Oriented Design with production full-stack execution.

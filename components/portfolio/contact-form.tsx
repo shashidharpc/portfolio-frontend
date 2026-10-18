@@ -69,13 +69,13 @@ export function PortfolioContactForm() {
 
   return (
     <section id="contact" className="py-24 border-t border-[var(--border)] bg-[var(--surface)]/40 relative">
-      <div className="mx-auto max-w-[1240px] px-6 sm:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
           <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#8B5CF6] mb-2 block">
             07 // Direct Communication
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
             Initiate a Conversation
           </h2>
           <p className="text-sm sm:text-base text-[var(--foreground-secondary)] mt-3 leading-relaxed">

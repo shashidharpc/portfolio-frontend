@@ -492,13 +492,50 @@
 }
 
 @media (max-width: 640px) {
+  .hero-section {
+    padding-top: 5.5rem;
+    padding-bottom: 2.25rem;
+  }
+  .hero-container {
+    gap: 1.75rem;
+    padding: 0 1.25rem;
+  }
+  .hero-kicker {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
   .hero-heading-greeting {
-    font-size: clamp(2.2rem, 8vw, 2.8rem);
+    font-size: clamp(1.8rem, 7.5vw, 2.4rem);
+    margin-bottom: 0.15rem;
   }
   .hero-heading-name {
-    font-size: clamp(2.4rem, 9.5vw, 3.4rem);
-    line-height: 1.1;
+    font-size: clamp(2.1rem, 8.8vw, 3rem);
+    line-height: 1.08;
     word-break: normal;
+  }
+  .hero-headline {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .hero-location {
+    margin-top: 0.9rem;
+    font-size: 0.8rem;
+  }
+  .hero-cta-row {
+    margin-top: 1.5rem;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 130px;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.86rem;
   }
 }
 

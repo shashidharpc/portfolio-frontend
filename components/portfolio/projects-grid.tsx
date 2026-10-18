@@ -217,15 +217,15 @@ export function PortfolioProjectsGrid({ projects }: ProjectsGridProps) {
 
   return (
     <section id="projects" className="py-24 border-t border-[var(--border)] relative">
-      <div className="mx-auto max-w-[1240px] px-6 sm:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div>
             <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#8B5CF6] mb-2 block">
               05 // Production Software
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
-              Featured Projects & Blueprints
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+              Featured Projects &amp; Blueprints
             </h2>
             <p className="text-sm sm:text-base text-[var(--foreground-secondary)] max-w-xl mt-3 leading-relaxed">
               Full-stack web applications featuring dynamic QR generation, HTML5 geofencing, relational database schemas, and role-based access control.

@@ -1,21 +1,27 @@
+const fs = require("fs");
+const path = require("path");
 const { execSync } = require("child_process");
 
-// 1. Ensure DATABASE_URL is always defined during build
-process.env.DATABASE_URL = process.env.DATABASE_URL || "file:./dev.db";
+const defaultEnv = 'DATABASE_URL="file:./dev.db"\nAUTH_SECRET="portfolio-production-auth-secret-fallback-key-32chars"\n';
 
-console.log("=== Vercel Build Step 1: Database Schema Sync ===");
-try {
-  execSync("npx prisma db push --skip-generate", {
-    stdio: "inherit",
-    env: process.env,
-  });
-  console.log("Database schema synchronized successfully.");
-} catch (err) {
-  console.warn("Database schema sync skipped or non-fatal warning:", err.message);
+// 1. Guarantee .env exists in project root for Prisma CLI and Next.js
+const rootEnv = path.join(__dirname, "..", ".env");
+if (!fs.existsSync(rootEnv)) {
+  fs.writeFileSync(rootEnv, defaultEnv);
+  console.log("Created root .env for build.");
 }
 
-console.log("=== Vercel Build Step 2: Next.js Production Build ===");
-execSync("next build", {
+// 2. Guarantee .env exists inside prisma directory for Prisma WASM engine
+const prismaEnv = path.join(__dirname, "..", "prisma", ".env");
+if (!fs.existsSync(prismaEnv)) {
+  fs.writeFileSync(prismaEnv, defaultEnv);
+  console.log("Created prisma/.env for build.");
+}
+
+process.env.DATABASE_URL = process.env.DATABASE_URL || "file:./dev.db";
+
+console.log("=== Vercel Build: Next.js Production Build ===");
+execSync("npx next build", {
   stdio: "inherit",
   env: process.env,
 });

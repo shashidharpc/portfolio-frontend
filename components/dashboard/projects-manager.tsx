@@ -125,7 +125,7 @@ export function ProjectsManager({ initialProjects }: { initialProjects: Project[
         const res = await updateProject(editingProject.id, formData);
         if (res.success && res.project) {
           setProjects((prev) =>
-            prev.map((p) => (p.id === editingProject.id ? (res.project as Project) : p))
+            prev.map((p) => (p.id === editingProject.id ? (res.project as unknown as Project) : p))
           );
           setIsDialogOpen(false);
         } else {
@@ -134,7 +134,7 @@ export function ProjectsManager({ initialProjects }: { initialProjects: Project[
       } else {
         const res = await createProject(formData);
         if (res.success && res.project) {
-          setProjects((prev) => [res.project as Project, ...prev]);
+          setProjects((prev) => [(res.project as unknown as Project), ...prev]);
           setIsDialogOpen(false);
         } else {
           setError(res.error || "Failed to create project");

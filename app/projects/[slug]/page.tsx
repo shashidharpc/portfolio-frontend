@@ -1,108 +1,54 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { prisma } from "@/lib/db";
-import { logEventSafe } from "@/lib/analytics";
-import { headers } from "next/headers";
+import { PROJECTS_DATA, PROFILE_DATA } from "@/lib/portfolio-data";
 import { PortfolioNavbar } from "@/components/portfolio/navbar";
 import { PortfolioFooter } from "@/components/portfolio/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowUpRight, Calendar, Eye } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
-import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export function generateStaticParams() {
+  return PROJECTS_DATA.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  try {
-    const project = await prisma.project.findUnique({
-      where: { slug },
-    });
+  const project = PROJECTS_DATA.find((p) => p.slug === slug);
 
-    if (project) {
-      return {
-        title: `${project.title} — Architectural Case Study`,
-        description: project.description,
-        openGraph: {
-          title: project.title,
-          description: project.description,
-          images: [project.coverImage],
-        },
-      };
-    }
-  } catch {
-    // Graceful fallback
+  if (!project) {
+    return { title: "Project Case Study — Shashidhar P C" };
   }
 
-  return { title: "Project Case Study — Shashidhar P C" };
+  return {
+    title: `${project.title} — Architectural Case Study`,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: [project.coverImage],
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const reqHeaders = await headers();
-  const forwarded = reqHeaders.get("x-forwarded-for");
-  const ip = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
-  const userAgent = reqHeaders.get("user-agent") || "";
-  const dnt = reqHeaders.get("dnt") === "1";
-
-  let project = null;
-  try {
-    project = await prisma.project.findUnique({
-      where: { slug },
-    });
-  } catch (err) {
-    console.warn("Database lookup failed for project:", slug, err);
-  }
+  const project = PROJECTS_DATA.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
   }
 
-  // Atomically increment views count and log event
-  prisma.project
-    .update({
-      where: { id: project.id },
-      data: { viewsCount: { increment: 1 } },
-    })
-    .catch(() => {});
-
-  logEventSafe({
-    type: "PROJECT_VIEW",
-    path: `/projects/${slug}`,
-    entityId: project.id,
-    metadata: { title: project.title },
-    ip,
-    userAgent,
-    dnt,
-  });
-
-  let tagsList: string[] = [];
-  try {
-    tagsList = JSON.parse(project.tags);
-  } catch {
-    tagsList = [];
-  }
-
-  const profile = await prisma.profile.findFirst({ where: { id: "default" } });
-  let socialLinks = {
-    github: "https://github.com/shashidharpc",
-    linkedin: "https://linkedin.com/in/shashidharpc",
-    email: "shashidharpc1012@gmail.com",
-    phone: "+91 7349128889",
-  };
-  try {
-    if (profile?.socialLinks) {
-      socialLinks = JSON.parse(profile.socialLinks);
-    }
-  } catch {
-    // fallback
-  }
+  const socialLinks = PROFILE_DATA.socialLinks;
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--background)]">
@@ -122,9 +68,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {/* Header */}
           <div className="flex flex-col gap-4 mb-8">
             <div className="flex flex-wrap items-center gap-2">
-              {tagsList.map((tag, i) => (
+              {project.technologies.map((tech, i) => (
                 <Badge key={i} variant="secondary" className="font-mono text-xs">
-                  {tag}
+                  {tech}
                 </Badge>
               ))}
               {project.featured && (
@@ -147,11 +93,11 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <div className="flex items-center gap-4 text-xs font-mono text-[var(--foreground-muted)]">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
-                  {formatDate(project.createdAt)}
+                  October 2026
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Eye className="h-3.5 w-3.5" />
-                  {project.viewsCount + 1} views
+                  {project.viewsCount} views
                 </span>
               </div>
 
@@ -185,19 +131,19 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             />
           </div>
 
-          {/* Project Details / Markdown Body */}
+          {/* Project Details */}
           <div className="rounded-[16px] border border-[var(--border)] bg-[var(--card)] p-8 sm:p-10 shadow-sm">
             <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-[var(--foreground)]">
               <h2 className="text-xl font-bold border-b border-[var(--border-subtle)] pb-2 text-[var(--foreground)]">
-                Project Overview & Challenge
+                Project Overview &amp; Architecture
               </h2>
               <p className="text-base text-[var(--foreground-secondary)] leading-relaxed">
                 {project.description}
               </p>
 
-              {project.contentMdx ? (
+              {project.content ? (
                 <div className="whitespace-pre-line text-sm sm:text-base text-[var(--foreground-secondary)] leading-relaxed pt-4 border-t border-[var(--border-subtle)]">
-                  {project.contentMdx}
+                  {project.content}
                 </div>
               ) : null}
             </div>

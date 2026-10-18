@@ -72,5 +72,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET || "portfolio-standalone-auth-secret-fallback-key-32chars",
 });

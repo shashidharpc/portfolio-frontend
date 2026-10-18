@@ -13,6 +13,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://shashidharpc.vercel.app"),
   title: {
     default: "Shashidhar P C | Full Stack Software Engineer",
     template: "%s | Shashidhar P C",

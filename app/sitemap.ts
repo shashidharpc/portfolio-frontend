@@ -1,40 +1,15 @@
 import { MetadataRoute } from "next";
-import { prisma } from "@/lib/db";
+import { PROJECTS_DATA } from "@/lib/portfolio-data";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://shashidharpc.vercel.app";
 
-  let projectEntries: MetadataRoute.Sitemap = [];
-  try {
-    const projects = await prisma.project.findMany({
-      where: { published: true },
-      select: { slug: true, updatedAt: true },
-    });
-
-    if (projects && projects.length > 0) {
-      projectEntries = projects.map((p) => ({
-        url: `${baseUrl}/projects/${p.slug}`,
-        lastModified: p.updatedAt,
-        changeFrequency: "weekly",
-        priority: 0.8,
-      }));
-    }
-  } catch (err) {
-    console.warn("Could not fetch database projects for sitemap, using defaults:", err);
-  }
-
-  // Fallback project entries if database is clean/empty during build
-  if (projectEntries.length === 0) {
-    projectEntries = [
-      "attendance-management-system",
-      "wheelz-vehicle-rental-system",
-    ].map((slug) => ({
-      url: `${baseUrl}/projects/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    }));
-  }
+  const projectEntries: MetadataRoute.Sitemap = PROJECTS_DATA.map((p) => ({
+    url: `${baseUrl}/projects/${p.slug}`,
+    lastModified: new Date(p.updatedAt),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
 
   return [
     {
